@@ -1,0 +1,5 @@
+SocksPort 9050 # Default: Bind to localhost:9050 for local connections.
+ORPort 9001
+Nickname mytornode
+ContactInfo myemail@mail.com
+ExitPolicy reject *:* # no exits allowed
