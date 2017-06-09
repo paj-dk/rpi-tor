@@ -1,4 +1,4 @@
-# Tor 0.3.0.7
+# Tor 0.3.0.8
 
 FROM armhf/alpine:latest
 MAINTAINER pajdk "https://hub.docker.com/r/pajdk/rpi-tor/"
@@ -17,14 +17,14 @@ RUN build_pkgs=" \
         zlib \
         libevent \
         " \
-  && apk --update add ${build_pkgs} ${runtime_pkgs} \
-  && cd /tmp
-RUN wget https://www.torproject.org/dist/tor-0.3.0.7.tar.gz \
-  && wget https://www.torproject.org/dist/tor-0.3.0.7.tar.gz.asc \
+  && apk --update add ${build_pkgs} ${runtime_pkgs}
+RUN cd /tmp \
+  && wget https://www.torproject.org/dist/tor-0.3.0.8.tar.gz \
+  && wget https://www.torproject.org/dist/tor-0.3.0.8.tar.gz.asc \
   && gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 0x9E92B601 \
-  && gpg --verify tor-0.3.0.7.tar.gz.asc \
-  && tar xzf tor-0.3.0.7.tar.gz \
-  && cd /tmp/tor-0.3.0.7 \
+  && gpg --verify tor-0.3.0.8.tar.gz.asc \
+  && tar xzvf tor-0.3.0.8.tar.gz \
+  && cd /tmp/tor-0.3.0.8 \
   && ./configure \
   && make -j6 \
   && make install \
