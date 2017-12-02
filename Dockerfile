@@ -1,4 +1,4 @@
-# Tor 0.3.1.8
+# Tor 0.3.1.9
 
 FROM armhf/alpine:latest
 MAINTAINER pajdk "https://hub.docker.com/r/pajdk/rpi-tor/"
@@ -19,12 +19,12 @@ RUN build_pkgs=" \
         " \
   && apk --update add ${build_pkgs} ${runtime_pkgs}
 RUN cd /tmp \
-  && wget https://www.torproject.org/dist/tor-0.3.1.8.tar.gz \
-  && wget https://www.torproject.org/dist/tor-0.3.1.8.tar.gz.asc \
+  && wget https://www.torproject.org/dist/tor-0.3.1.9.tar.gz \
+  && wget https://www.torproject.org/dist/tor-0.3.1.9.tar.gz.asc \
   && gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 0x9E92B601 \
-  && gpg --verify tor-0.3.1.8.tar.gz.asc \
-  && tar xzvf tor-0.3.1.8.tar.gz \
-  && cd /tmp/tor-0.3.1.8 \
+  && gpg --verify tor-0.3.1.9.tar.gz.asc \
+  && tar xzvf tor-0.3.1.9.tar.gz \
+  && cd /tmp/tor-0.3.1.9 \
   && ./configure \
   && make -j6 \
   && make install \
@@ -37,6 +37,8 @@ RUN adduser -Ds /bin/sh tor
 
 RUN mkdir /etc/tor
 COPY torrc /etc/tor/
+
+RUN mkdir /home/tor/.tor && chown tor:tor /home/tor/.tor -R
 
 USER tor
 CMD ["tor", "-f", "/etc/tor/torrc"]
